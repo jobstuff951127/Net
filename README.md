@@ -1,6 +1,5 @@
 # NTT-Data
 NTT Data code challenge
-Certainly! Here's a "Read Me" document for your project:
 
 # Project Overview
 

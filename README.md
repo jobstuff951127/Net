@@ -46,9 +46,3 @@ This project is a .NET 7 application that follows the Repository Design Pattern,
 
 ## License
 - This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-- For any questions or issues, please contact [Your Name] at [Your Email].
-
-## Acknowledgments
-- Special thanks to the open-source community and contributors who made this project possible.

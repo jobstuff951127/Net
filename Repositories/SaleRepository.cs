@@ -14,6 +14,19 @@ namespace NTT_Data.Repositories
         /// Keep this method for backwards compatibility.
         /// </summary>
         public override Task<List<Sale>> GetAllAsync() => base.GetAllAsync();
+        public override async Task<Sale?> GetAsync(int id)
+        {
+            try
+            {
+                return await DbSet.FirstOrDefaultAsync(item => item.SaleId == id);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.ToString());
+                throw;
+            }
+        }
+
         public override async Task<List<Sale>> GetByDateRangeAsync(DateTime initDate, DateTime endDate)
         {
             try
@@ -51,6 +64,7 @@ namespace NTT_Data.Repositories
                     existdata.Total = entity.Total;
                     existdata.Date = entity.Date;
                     existdata.CustomerId = entity.CustomerId;
+                    existdata.IsCancelled = entity.IsCancelled;
                     
                     return true;
                 }

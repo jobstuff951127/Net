@@ -8,10 +8,11 @@ namespace NTT_Data.Models
         [Key]
         public int  SaleId { get; set; }
         public DateTime Date { get; set; }
-        public int CustomerId { get; set; }
+        public required int CustomerId { get; set; }
         public decimal Total { get; set; }
+        public bool IsCancelled { get; set; }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public required Customer Customer { get; set; }
 
     }

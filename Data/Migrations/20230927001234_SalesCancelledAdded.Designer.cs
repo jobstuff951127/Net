@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NTT_Data.Data;
 
@@ -11,9 +12,11 @@ using NTT_Data.Data;
 namespace NTT_Data.Migrations
 {
     [DbContext(typeof(NTTDataContext))]
-    partial class NTTDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230927001234_SalesCancelledAdded")]
+    partial class SalesCancelledAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -47,5 +47,26 @@ namespace NTT_Data.Controllers
 
             return Ok();
         }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> Put(SaleDto SaleDto)
+        {
+
+            var existItem = await _unitofWork.SalesRepository.GetAsync(SaleDto.SaleId);
+
+            if (existItem is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var sale = _mapper.Map<Sale>(SaleDto);
+                await _unitofWork.SalesRepository.UpdateEntity(sale);
+                await _unitofWork.CompleteAsync();
+
+                _logger.LogInformation("Updated: {Date}", DateTime.Now);
+                return Ok();
+            }
+        }
     }
 }

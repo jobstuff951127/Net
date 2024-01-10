@@ -1,19 +1,20 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using NTT_Data.Data;
-using NTT_Data.Interfaces;
+using Net.Data;
+using Net.Interfaces;
+using Net.Models;
 using System.Diagnostics;
 
-namespace NTT_Data.Repositories
+namespace Net.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected NTTDataContext dbContext;
+        protected NetContext dbContext;
         
         internal DbSet<T> DbSet { get; set; }
-        public GenericRepository(NTTDataContext NTTDataContext)
+        public GenericRepository(NetContext netContext)
         {
-            dbContext = NTTDataContext;
+            dbContext = netContext;
             DbSet = dbContext.Set<T>();
         }
         public virtual Task<bool> AddEntity(T entity)
@@ -25,6 +26,8 @@ namespace NTT_Data.Repositories
         {
             throw new NotImplementedException();
         }
+
+
 
         public virtual Task<List<T>> GetAllAsync()
         {

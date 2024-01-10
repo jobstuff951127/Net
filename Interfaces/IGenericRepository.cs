@@ -1,4 +1,6 @@
-﻿namespace NTT_Data.Interfaces
+﻿using Net.Models;
+
+namespace Net.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {
@@ -8,5 +10,6 @@
         Task<bool> AddEntity(T entity);
         Task<bool> UpdateEntity(T entity);
         Task<bool> DeleteEntity(int id);
+
     }
 }

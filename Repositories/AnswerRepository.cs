@@ -1,24 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NTT_Data.Data;
-using NTT_Data.Interfaces;
-using NTT_Data.Models;
+using Net.Data;
+using Net.Interfaces;
+using Net.Models;
 using System.Diagnostics;
 
-namespace NTT_Data.Repositories
+namespace Net.Repositories
 {
-    public class ProductRepository : GenericRepository<Product>, IProductsRepository 
+    public class AnswerRepository : GenericRepository<Answer>, IAnswerRepository
     {
-        public ProductRepository(NTTDataContext NTTDataDb) : base(NTTDataDb) {}
+        public AnswerRepository(NetContext NetDataDb) : base(NetDataDb) {}
        
         /// <summary>
         /// Keep this method for backwards compatibility.
         /// </summary>
-        public override Task<List<Product>> GetAllAsync() => base.GetAllAsync();
-        public override async Task<Product?> GetAsync(int id)
+        public override Task<List<Answer>> GetAllAsync() => base.GetAllAsync();
+        public override async Task<Answer?> GetAsync(int id)
         {
             try
             {
-                return await DbSet.FirstOrDefaultAsync(item => item.ProductId == id);
+                return await DbSet.FirstOrDefaultAsync(item => item.AnswerId == id);
             }
             catch (Exception ex)
             {
@@ -26,13 +26,13 @@ namespace NTT_Data.Repositories
                 throw;
             }
         }
-        public override async Task<bool> AddEntity(Product entity)
+        public override async Task<bool> AddEntity(Answer entity)
         {
             try
             {
                 await DbSet.AddAsync(entity);
                 return true;
-
+                 
             }
             catch (Exception ex)
             {
@@ -40,16 +40,17 @@ namespace NTT_Data.Repositories
                 throw;
             }
         }
-        public override async Task<bool> UpdateEntity(Product entity)
+        public override async Task<bool> UpdateEntity(Answer entity)
         {
             try
             {
-                var existdata = await DbSet.FirstOrDefaultAsync(item => item.ProductId == entity.ProductId);
+                var existdata = await DbSet.FirstOrDefaultAsync(item => item.AnswerId == entity.AnswerId);
                 if (existdata != null)
                 {
-                    existdata.Name = entity.Name;
-                    existdata.UnitPrice = entity.UnitPrice;
-                    existdata.Cost = entity.Cost;
+                    existdata.Content = entity.Content;
+                    existdata.AnswerId = entity.AnswerId;
+                    existdata.Question = entity.Question;
+                    existdata.QuestionId = entity.QuestionId;
                     return true;
                 }
                 else
@@ -67,7 +68,7 @@ namespace NTT_Data.Repositories
 
         public override async Task<bool> DeleteEntity(int id)
         {
-            var existdata = await DbSet.FirstOrDefaultAsync(item => item.ProductId == id);
+            var existdata = await DbSet.FirstOrDefaultAsync(item => item.AnswerId == id);
             if (existdata != null)
             {
                 DbSet.Remove(existdata);
@@ -82,3 +83,4 @@ namespace NTT_Data.Repositories
 
     }
 }
+

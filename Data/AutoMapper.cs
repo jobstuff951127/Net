@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using NTT_Data.Data.DTOS;
-using NTT_Data.Models;
+using Net.Data.DTOS;
+using Net.Models;
 
-namespace NTT_Data.Data
+namespace Net.Data
 {
     public class AutoMapper : Profile
     {
         public AutoMapper()
         {
-            CreateMap<ConceptDto, Concept>();
-            CreateMap<CustomerDto, Customer>();
-            CreateMap<SaleDto, Sale>();
-            CreateMap<ProductDto, Product>();
+            CreateMap<QuestionDto, Question>();
+            CreateMap<AnswerDto, Answer>();
+            CreateMap<UserDto, User>();
+            CreateMap<VoteDto, Vote>();
         }
     }
 }

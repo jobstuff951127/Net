@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using NTT_Data.Data;
-using NTT_Data.Models;
-using NTT_Data.UnitOfWork;
+using Net.Data;
+using Net.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddDbContext<NTTDataContext>(options =>
+builder.Services.AddDbContext<NetContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
@@ -19,8 +18,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWorkRepository>();
 
-
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+using var db = scope.ServiceProvider.GetRequiredService<NetContext>();
+
+db.Database.Migrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -36,3 +39,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+

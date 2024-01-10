@@ -1,12 +1,11 @@
-﻿using NTT_Data.Interfaces;
+﻿using Net.Interfaces;
 
-namespace NTT_Data.UnitOfWork
+namespace Net.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        ICustomersRepository CustomersRepository { get; }
-        IProductsRepository ProductsRepository { get; }
-        ISalesRepository SalesRepository { get; }
+        IAnswerRepository AnswerRepository { get; }
+        IQuestionRepository QuestionRepository { get; }
 
         Task CompleteAsync();
     }

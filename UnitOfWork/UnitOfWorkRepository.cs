@@ -1,29 +1,27 @@
-﻿using NTT_Data.Data;
-using NTT_Data.Interfaces;
-using NTT_Data.Repositories;
+﻿using Net.Data;
+using Net.Interfaces;
+using Net.Repositories;
 
 
-namespace NTT_Data.UnitOfWork
+namespace Net.UnitOfWork
 {
     public class UnitOfWorkRepository : IUnitOfWork
     {
-        public ICustomersRepository CustomersRepository { get; private set; }
-        public IProductsRepository ProductsRepository { get; private set; }
-        public ISalesRepository SalesRepository { get; private set; }
+        public IAnswerRepository AnswerRepository { get; private set; }
+        public IQuestionRepository QuestionRepository { get; private set; }
 
-        private readonly NTTDataContext _NTTDataContext;
+        private readonly NetContext _NetContext;
 
-        public UnitOfWorkRepository(NTTDataContext NTTDataContext)
+        public UnitOfWorkRepository(NetContext netContext)
         {
-            _NTTDataContext = NTTDataContext;
-            CustomersRepository = new CustomerRepository(NTTDataContext);
-            ProductsRepository = new ProductRepository(NTTDataContext);
-            SalesRepository = new SaleRepository(NTTDataContext);
+            _NetContext = netContext;
+            AnswerRepository = new AnswerRepository(netContext);
+            QuestionRepository = new QuestionRepository(netContext);
         }
 
         public async Task CompleteAsync()
         {
-            await _NTTDataContext.SaveChangesAsync();
+            await _NetContext.SaveChangesAsync();
         }
     }
 }
